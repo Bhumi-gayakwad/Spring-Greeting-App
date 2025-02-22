@@ -34,4 +34,3 @@ public class GreetingController {
         return new Greeting("Greeting deleted successfully.");
     }
 }
-
