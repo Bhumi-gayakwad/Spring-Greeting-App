@@ -1,6 +1,10 @@
 package com.spring_greeting_app.spring_greeting_app.model;
 
-public class Greeting { private String message;
+public class Greeting {
+    private String message;
+
+    public Greeting() {
+    }
 
     public Greeting(String message) {
         this.message = message;
@@ -14,4 +18,3 @@ public class Greeting { private String message;
         this.message = message;
     }
 }
-
