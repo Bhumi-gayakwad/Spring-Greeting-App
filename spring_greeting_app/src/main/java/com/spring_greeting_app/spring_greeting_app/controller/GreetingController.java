@@ -10,9 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+ 
 
 import java.util.List;
-
+ 
 @RestController
 @RequestMapping("/hello")
 public class GreetingController {
@@ -25,11 +26,13 @@ public class GreetingController {
         return ResponseEntity.ok(new Greeting(greetingService.getGreetingMessage()));
 
     }
+
     @GetMapping("/greetings")
     public List<GreetingEntity> getAllGreetings() {
         return greetingService.getAllGreetings();
 
     }
+ 
     @GetMapping("/greeting/{id}")
     public GreetingEntity getGreetingById(@PathVariable Long id) {
         return greetingService.getGreetingById(id);
@@ -40,12 +43,24 @@ public class GreetingController {
         return greetingService.getGreetingById(id);
 
     }
+ 
 
     @PostMapping("/greeting")
     public ResponseEntity<GreetingEntity> createGreeting(@RequestBody UserDTO user) {
         String message = generateGreetingMessage(user.getFirstName(), user.getLastName());
         GreetingEntity savedGreeting = greetingService.saveGreetingMessage(message);
         return ResponseEntity.status(201).body(savedGreeting);
+    }
+
+    @PutMapping("/greeting/{id}")
+    public GreetingEntity updateGreeting(@PathVariable Long id, @RequestBody Greeting updatedGreeting) {
+        return greetingService.updateGreeting(id, updatedGreeting.getMessage());
+    }
+
+    @DeleteMapping("/greeting/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.ok("Greeting with ID " + id + " has been deleted successfully.");
     }
 
     private String generateGreetingMessage(String firstName, String lastName) {
