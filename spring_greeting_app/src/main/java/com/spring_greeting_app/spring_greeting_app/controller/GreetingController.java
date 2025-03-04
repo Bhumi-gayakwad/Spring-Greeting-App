@@ -24,28 +24,28 @@ public class GreetingController {
     public List<GreetingEntity> getAllGreetings() {
         return greetingService.getAllGreetings();
     }
-        @GetMapping("/greeting/{id}")
-        public GreetingEntity getGreetingById(@PathVariable Long id) {
-            return greetingService.getGreetingById(id);
+    @GetMapping("/greeting/{id}")
+    public GreetingEntity getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
 
-        }
+    }
 
-        @PostMapping("/greeting")
-        public ResponseEntity<GreetingEntity> createGreeting(@RequestBody UserDTO user) {
-            String message = generateGreetingMessage(user.getFirstName(), user.getLastName());
-            GreetingEntity savedGreeting = greetingService.saveGreetingMessage(message);
-            return ResponseEntity.status(201).body(savedGreeting);
-        }
+    @PostMapping("/greeting")
+    public ResponseEntity<GreetingEntity> createGreeting(@RequestBody UserDTO user) {
+        String message = generateGreetingMessage(user.getFirstName(), user.getLastName());
+        GreetingEntity savedGreeting = greetingService.saveGreetingMessage(message);
+        return ResponseEntity.status(201).body(savedGreeting);
+    }
 
-        private String generateGreetingMessage(String firstName, String lastName) {
-            if (firstName != null && !firstName.isEmpty() && lastName != null && !lastName.isEmpty()) {
-                return "Hello " + firstName + " " + lastName + " from BridgeLabz!";
-            } else if (firstName != null && !firstName.isEmpty()) {
-                return "Hello " + firstName + " from BridgeLabz!";
-            } else if (lastName != null && !lastName.isEmpty()) {
-                return "Hello " + lastName + " from BridgeLabz!";
-            } else {
-                return "Hello World!";
-            }
+    private String generateGreetingMessage(String firstName, String lastName) {
+        if (firstName != null && !firstName.isEmpty() && lastName != null && !lastName.isEmpty()) {
+            return "Hello " + firstName + " " + lastName + " from BridgeLabz!";
+        } else if (firstName != null && !firstName.isEmpty()) {
+            return "Hello " + firstName + " from BridgeLabz!";
+        } else if (lastName != null && !lastName.isEmpty()) {
+            return "Hello " + lastName + " from BridgeLabz!";
+        } else {
+            return "Hello World!";
         }
     }
+}
