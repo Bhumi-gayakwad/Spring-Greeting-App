@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class GreetingService {
 
@@ -35,13 +34,16 @@ public class GreetingService {
         }
     }
 
+    public void deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Greeting not found with ID: " + id);
+        }
+    }
+
     public GreetingEntity saveGreetingMessage(String message) {
         GreetingEntity greeting = new GreetingEntity(message);
         return greetingRepository.save(greeting);
-    }
-
-    public GreetingEntity getGreetingById(Long id) {
-        Optional<GreetingEntity> greeting = greetingRepository.findById(id);
-        return greeting.orElseThrow(() -> new RuntimeException("Greeting not found with ID: " + id));
     }
 }
