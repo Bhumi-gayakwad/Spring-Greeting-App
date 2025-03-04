@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+ 
+
+import java.util.List;
+ 
 @RestController
 @RequestMapping("/hello")
 public class GreetingController {
@@ -20,12 +24,26 @@ public class GreetingController {
     @GetMapping("/greeting")
     public ResponseEntity<Greeting> getGreeting() {
         return ResponseEntity.ok(new Greeting(greetingService.getGreetingMessage()));
+
     }
 
     @GetMapping("/greetings")
     public List<GreetingEntity> getAllGreetings() {
         return greetingService.getAllGreetings();
+
     }
+ 
+    @GetMapping("/greeting/{id}")
+    public GreetingEntity getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
+
+
+    @GetMapping("/greeting/{id}")
+    public GreetingEntity getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
+
+    }
+ 
 
     @PostMapping("/greeting")
     public ResponseEntity<GreetingEntity> createGreeting(@RequestBody UserDTO user) {

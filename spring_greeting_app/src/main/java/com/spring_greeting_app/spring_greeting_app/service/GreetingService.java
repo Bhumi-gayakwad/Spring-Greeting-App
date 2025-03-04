@@ -1,4 +1,7 @@
 package com.spring_greeting_app.spring_greeting_app.service;
+import com.spring_greeting_app.spring_greeting_app.model.GreetingEntity;
+import com.spring_greeting_app.spring_greeting_app.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.spring_greeting_app.spring_greeting_app.model.GreetingEntity;
 import com.spring_greeting_app.spring_greeting_app.repository.GreetingRepository;
@@ -8,6 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+ 
+
+import java.util.Optional;
+
+ 
 @Service
 public class GreetingService {
 
@@ -18,6 +26,7 @@ public class GreetingService {
         return "Hello World!";
     }
 
+ 
     public List<GreetingEntity> getAllGreetings() {
         return greetingRepository.findAll();
     }
@@ -33,7 +42,7 @@ public class GreetingService {
             throw new RuntimeException("Greeting not found with ID: " + id);
         }
     }
-
+ 
     public void deleteGreeting(Long id) {
         if (greetingRepository.existsById(id)) {
             greetingRepository.deleteById(id);
@@ -41,7 +50,9 @@ public class GreetingService {
             throw new RuntimeException("Greeting not found with ID: " + id);
         }
     }
-
+ 
+ 
+  
     public GreetingEntity saveGreetingMessage(String message) {
         GreetingEntity greeting = new GreetingEntity(message);
         return greetingRepository.save(greeting);
