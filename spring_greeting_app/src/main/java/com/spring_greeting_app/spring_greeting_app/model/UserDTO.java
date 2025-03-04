@@ -28,4 +28,3 @@ public class UserDTO {
         this.lastName = lastName;
     }
 }
-
